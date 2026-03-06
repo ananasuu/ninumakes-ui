@@ -1,11 +1,11 @@
 {
-  "name": "@ninamakes/ui",
+  "name": "@ninumakes/ui",
   "version": "1.0.0",
   "type": "module",
   "peerDependencies": {
     "astro": "^4.0.0"
   },
   "exports": {
-    "./BaseLayout.astro": "./src/layouts/BaseLayout.astro",
+    "./BaseLayout.astro": "./src/layouts/BaseLayout.astro"
 }
 }
