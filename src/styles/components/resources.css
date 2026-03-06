@@ -1,0 +1,99 @@
+/* Resources List Styles */
+.resources-list {
+    width: 100%;
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+    border: 1px solid var(--border-subtle);
+    background-color: var(--light-grey);
+    padding-block-start: 0.5rem;
+    position: relative;
+    overflow: clip;
+    border-radius: var(--rounded-card-corners);
+
+    details {
+        display: contents;
+
+        &[open] {
+            --details-link-bg: #fff;
+            --details-pointer-events: none;
+            --details-link-border-radius: 0.5rem 0.5rem 0 0;
+
+            &::details-content {
+                display: contents;
+            }
+        }
+    }
+}
+
+.resources-list summary {
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    border-radius: 1.5rem;
+    border: 2px solid transparent;
+    width: max-content;
+    height: 100%;
+    max-width: 100%;
+    display: grid;
+    background-color: var(--secondary-button-color);
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+    order: 1;
+    margin: 0.3rem 0.5rem;
+    color: var(--black);
+
+    &:hover,
+    &:focus-visible,
+    &:active {
+        background-color: var(--secondary-button-hover-color);
+        color: var(--white);
+    }
+}
+
+.resources-list summary::-webkit-details-marker {
+    display: none;
+}
+
+.resources-list summary:focus-visible {
+    outline: 2px solid var(--dark-font);
+    outline-offset: 2px;
+}
+
+.resources-list summary>span:first-child {
+    font-weight: 500;
+    font-size: var(--font-size-small);
+}
+
+.resources-list details[open] summary {
+    background: var(--secondary-button-active-color);
+    color: var(--white);
+}
+
+.resources-list details[open]> :not(summary) {
+    flex-basis: 100%;
+    width: 100%;
+    order: 2;
+    margin-top: 0.5rem;
+    padding: 1rem;
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+
+    h3 {
+        font-size: var(--font-size-large);
+        margin-block-end: 0.5rem;
+    }
+
+    p,
+    h3 {
+        margin-block-start: 0;
+    }
+
+    p {
+        margin-block-end: 1.5rem;
+    }
+}

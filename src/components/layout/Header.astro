@@ -1,0 +1,105 @@
+---
+import { getLocaleFromUrl } from '@/utils/i18n/i18n';
+import type { HeaderConfig } from '@/types';
+
+const { header, description, nav } = Astro.props as HeaderConfig;
+
+const pathname = Astro.url.pathname;
+const currentLocale = getLocaleFromUrl(Astro.url.pathname);
+const isGerman = currentLocale === "de";
+const ariaLabel = isGerman ? "Sprachauswahl" : "Language switch";
+
+const normalizeFromGerman = (path: string) =>
+    path.replace(/^\/de(\/|$)/, (_, suffix) => suffix || "/");
+
+const englishPath = isGerman ? normalizeFromGerman(pathname) : pathname;
+const germanPath = isGerman
+    ? pathname
+    : `/de${pathname === "/" ? "" : pathname}`;
+const activeLang = isGerman ? "de" : "en";
+---
+
+<header>
+    <h1>{header}</h1>
+    <p>{description}</p>
+
+    <div
+        class="language-switch"
+        data-active={activeLang}
+        role="group"
+        aria-label={ariaLabel}
+    >
+        <a
+            href={englishPath}
+            class="language-link"
+            data-active={!isGerman ? "true" : undefined}
+            aria-current={!isGerman ? "page" : undefined}
+        >
+            EN
+        </a>
+
+        <a
+            href={germanPath}
+            class="language-link"
+            data-active={isGerman ? "true" : undefined}
+            aria-current={isGerman ? "page" : undefined}
+        >
+            DE
+        </a>
+    </div>
+</header>
+
+      <nav>
+        <ul>
+            {nav.map((item: [string, string]) => (
+                <li>
+                <a
+                    href={item[0]}
+                    class={item[0] === pathname ? "active" : undefined}
+                >
+                    {item[1]}
+                </a>
+                </li>
+            ))}
+        </ul>
+      </nav>
+
+<script is:inline>
+    const switchEl = document.querySelector(".language-switch");
+
+    if (switchEl) {
+        switchEl.addEventListener("click", (event) => {
+            const target = event.target;
+            if (!(target instanceof HTMLAnchorElement)) return;
+
+            const label = target.textContent?.trim().toLowerCase();
+            if (label !== "en" && label !== "de") return;
+
+            // 👉 Switch-Status setzen (triggert deine ::before-Animation)
+            switchEl.setAttribute("data-active", label);
+            target.setAttribute("data-active", "true");
+
+            switchEl.querySelectorAll(".language-link").forEach((link) => {
+                const isActive =
+                    link.textContent?.trim().toLowerCase() === label;
+
+                link.toggleAttribute("data-active", isActive);
+
+                if (isActive) {
+                    link.setAttribute("aria-current", "page");
+                } else {
+                    link.removeAttribute("aria-current");
+                }
+            });
+
+            // 👉 Seite sanft ausblenden
+            document.documentElement.classList.add("is-leaving");
+
+            // 👉 nach Animation navigieren
+            setTimeout(() => {
+                const currentHash = window.location.hash;
+                window.location.href = target.href + currentHash;
+            }, 250); // entspricht deiner CSS-transition
+        });
+    }
+</script>

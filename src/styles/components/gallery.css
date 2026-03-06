@@ -1,0 +1,120 @@
+/* Cosplay/Costume Gallery Styles */
+.infocard.costume,
+.infocard.cosplay-info {
+    grid-template-areas: "title" "source" "img" "genres" "description" "link";
+    grid-template-rows: auto auto auto auto 1fr;
+
+    a {
+        margin-block-start: 0.75rem;
+    }
+
+    picture,
+    .card-media {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-height: 450px;
+        height: auto;
+        overflow: hidden;
+        justify-self: center;
+        margin-inline: auto;
+        background-color: #ffffff;
+
+        img {
+            object-fit: cover;
+            object-position: center;
+            width: auto;
+            height: 100%;
+            max-height: 450px;
+            max-width: calc(450px * 2 / 3);
+            aspect-ratio: 2 / 3;
+            display: block;
+        }
+    }
+}
+
+.infocard.cosplay-info picture,
+.infocard.cosplay-info .card-media {
+    min-height: 450px;
+    height: 100%;
+
+    img {
+        height: 100%;
+        aspect-ratio: unset;
+        max-width: unset;
+        width: 100%;
+    }
+}
+
+.infocard>h3 {
+    grid-area: title;
+    font-size: var(--font-size-large);
+    margin-block: 0;
+}
+
+.infocard p {
+    margin: 0;
+    height: fit-content;
+
+    &.source,
+    &.genres,
+    &.use {
+        color: var(--light-font);
+        font-size: var(--font-size-small);
+        margin-block-end: 0.5em;
+    }
+
+    &.use {
+        grid-area: use;
+    }
+
+    &.source {
+        grid-area: source;
+    }
+
+    &.description {
+        grid-area: description;
+        margin-block-start: 0.5em;
+    }
+
+    &.genres {
+        margin-block-end: 0.5em;
+        grid-area: genres;
+        margin-block-start: 0.25em;
+
+        +p {
+            margin-block-end: 1em;
+        }
+    }
+}
+
+.infocard:not(:has(p)) {
+    grid-template-areas: "title" "list";
+    grid-template-rows: auto 1fr;
+
+    li {
+        height: initial;
+    }
+}
+
+ul li picture,
+ul li picture[src$=".png"],
+ul li picture[src$=".svg"] {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: var(--rounded-corners);
+}
+
+.cosplay-info picture {
+    width: 100%;
+    object-fit: cover;
+    border-radius: var(--rounded-corners);
+}
+
+ul li img[src$=".png"],
+ul li img[src$=".svg"] {
+    width: auto;
+    object-fit: initial;
+}

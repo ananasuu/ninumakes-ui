@@ -1,0 +1,8 @@
+{
+  "name": "@ninamakes/ui",
+  "version": "1.0.0",
+  "type": "module",
+  "peerDependencies": {
+    "astro": "^4.0.0"
+  }
+}

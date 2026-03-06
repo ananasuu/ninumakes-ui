@@ -1,0 +1,102 @@
+---
+export interface FooterProps {
+  imprint: {
+    name: string
+    address: string
+    street: string
+    city: string
+    email: string
+    url: string
+    socialMedia?: {
+      instagram?: string
+      github?: string
+      tiktok?: string
+    }
+  }
+
+  labels?: {
+    imprintTitle?: string
+    contact?: string
+  }
+}
+
+const { imprint, labels } = Astro.props as FooterProps
+---
+
+<footer>
+
+  <h2>{labels?.imprintTitle ?? "Imprint"}</h2>
+
+  <p>
+    {imprint.name}<br />
+    {imprint.address}<br />
+    {imprint.street}<br />
+    {imprint.city}<br />
+
+    <a href={`mailto:${imprint.email}`}>
+      {imprint.email}
+    </a>
+    <br />
+
+    <a href={imprint.url}>
+      {labels?.contact ?? "Contact"}
+    </a>
+  </p>
+
+  {imprint.socialMedia && (
+    <ul>
+
+      {imprint.socialMedia.instagram && (
+        <li>
+          <a href={imprint.socialMedia.instagram} aria-label="Instagram">
+            <img
+              src="/assets/img/icons8_instagram.png"
+              alt="Instagram"
+              width="50"
+              height="50"
+              loading="lazy"
+              class="icon-motion"
+            />
+          </a>
+        </li>
+      )}
+
+      {imprint.socialMedia.github && (
+        <li>
+          <a href={imprint.socialMedia.github} aria-label="GitHub">
+            <img
+              src="/assets/img/icons8_github.png"
+              alt="GitHub"
+              width="50"
+              height="50"
+              loading="lazy"
+              class="icon-motion"
+            />
+          </a>
+        </li>
+      )}
+
+      {imprint.socialMedia.tiktok && (
+        <li>
+          <a href={imprint.socialMedia.tiktok} aria-label="TikTok">
+            <img
+              src="/assets/img/icons8_tiktok.png"
+              alt="TikTok"
+              width="50"
+              height="50"
+              loading="lazy"
+              class="icon-motion"
+            />
+          </a>
+        </li>
+      )}
+
+    </ul>
+  )}
+
+  <p class="copyright">
+    © Untitled. Design:
+    <a href="https://html5up.net">HTML5 UP</a>.
+  </p>
+
+</footer>

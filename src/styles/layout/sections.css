@@ -1,0 +1,119 @@
+/* Section Container & Main Styles */
+
+main {
+    container-type: inline-size;
+    container-name: main-content;
+    background-color: #ffffff;
+    border-radius: var(--rounded-corners);
+    color: var(--dark-font);
+
+    >section:not(:first-of-type) {
+        border-top: solid 1px #dddddd;
+        box-sizing: border-box;
+
+        &:first-child {
+            border-top: 0;
+        }
+    }
+
+    >section:first-of-type h2 {
+        justify-self: start;
+    }
+}
+
+/* Skills & Certificates Combined Layout */
+.skills-certificates-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: start;
+    border-top: var(--divider);
+
+    section {
+        text-align: center;
+        justify-items: center;
+    }
+
+    section:last-of-type {
+        border-top: var(--divider);
+    }
+
+    #skills>div>div.infocard>ul>li {
+        height: fit-content !important;
+    }
+}
+
+/* Skills Section */
+#skills {
+    display: block;
+
+    div {
+        width: 100%;
+    }
+
+    .infocard ul {
+        list-style: none !important;
+        padding: 1.5rem;
+    }
+
+    li {
+        text-align: center !important;
+        height: fit-content;
+
+        &:not(:first-of-type) {
+            border-top: var(--divider);
+            margin-block-start: 0.25rem;
+            padding-block-start: 0.25rem;
+        }
+    }
+
+    li:has(span) {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        align-items: center;
+
+        span:first-of-type {
+            justify-self: end;
+            text-align: right;
+        }
+
+        span:last-of-type {
+            justify-self: start;
+            text-align: left;
+            color: var(--secondary-font);
+        }
+    }
+}
+
+@container main-content (min-width: 1000px) {
+    .skills-certificates-container {
+        grid-template-columns: 1fr 40%;
+
+        #skills {
+            div div {
+                padding-inline: 0;
+                background-color: var(--light-grey);
+                box-shadow: var(--shadow-card-md);
+                padding: var(--spacing-base);
+            }
+
+            header {
+                margin-bottom: 0 !important;
+            }
+        }
+
+        section:last-of-type {
+            border-top: none;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--link-card-light-grey-hover);
+            margin: clamp(2.5em, 6vw, 7em) clamp(1em, 5vw, 5em) clamp(2.5em, 7vw, 7em) 0;
+            padding: var(--spacing-base);
+        }
+
+        section:first-of-type {
+            padding-inline-end: 2.5rem;
+        }
+    }
+}
