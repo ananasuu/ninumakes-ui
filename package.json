@@ -6,6 +6,6 @@
   "astro": ">=4"
   },
   "exports": {
-    "./Base.astro": "./src/layouts/Base.astro"
+    "./BasicLayout.astro": "./src/layouts/BasicLayout.astro"
 }
 }
