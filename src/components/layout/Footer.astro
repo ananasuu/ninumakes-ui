@@ -1,26 +1,15 @@
 ---
-export interface FooterProps {
-  imprint: {
-    name: string
-    address: string
-    street: string
-    city: string
-    email: string
-    url: string
-    socialMedia?: {
-      instagram?: string
-      github?: string
-      tiktok?: string
-    }
-  }
+import imprintData from "../../data/imprint.json";
 
+export interface FooterProps {
   labels?: {
     imprintTitle?: string
     contact?: string
   }
 }
 
-const { imprint, labels } = Astro.props as FooterProps
+const { labels } = Astro.props as FooterProps
+const imprint = imprintData
 ---
 
 <footer>
