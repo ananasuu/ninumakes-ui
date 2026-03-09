@@ -62,7 +62,7 @@ body {
 body {
   background-color: var(--pink-bg);
   background-image:
-    url("/assets/img/overlay.png"), linear-gradient(var(--orange-pink-gradient));
+    url("../assets/img/overlay.png"), linear-gradient(var(--orange-pink-gradient));
   color: rgba(255, 255, 255, 0.65);
   margin: 0;
   container-type: inline-size;
